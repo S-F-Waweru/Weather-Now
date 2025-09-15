@@ -1,4 +1,4 @@
-# Weather-Now
+# Weather-Now (FrondMentor Challenge)
 ![Design preview for the Weather app challenge](./preview.jpg)
 
 A modern, responsive weather application built with **Angular** that shows current weather, hourly & 7-day forecasts, and supports unit conversion.
