@@ -19,16 +19,42 @@
   <!--  Search section-->
   <div class="container mx-auto">
     <div class="flex justify-center gap-4">
-      <div class="flex align-middle  bg-[var(--neutral-800)] rounded-md p-3 w-[500px] gap-4">
+      <div class="flex align-middle  bg-[var(--neutral-800)] rounded-md p-3 w-[500px] gap-4 relative">
         <img src="assets/Search%20Icon.svg">
-        <input type="text" class="w-full bg-transparent outline-none text-white">
+        <input type="text"
+               (input)="onType($event)"
+               class="w-full bg-transparent outline-none text-white">
+        <!-- show “Searching” only while actively searching -->
+        @if (isSearching) {
+          <div class="bg-[var(--neutral-800)] rounded-md absolute top-15 left-0 w-full p-4">
+            <div class="flex flex-row gap-2">
+              <img src="/assets/Daily%20Forecast%20Title-2.svg" alt="searching">
+                  <p>Searching…</p>
+            </div>
+          </div>
+        }
+
+        <!-- show results only when search is done and we have data -->
+        @if (!isSearching && results.length > 0) {
+          <div class="bg-[var(--neutral-800)] rounded-md absolute top-15 left-0 w-full p-4">
+            @for (city of results; track city.id) {
+              <p
+                class="text-white text-lg p-2 rounded-md cursor-pointer hover:bg-[var(--neutral-700)]"
+              >
+                {{ city.name }}, {{ city.country }}
+              </p>
+            }
+          </div>
+        }
+
       </div>
 
-      <button class="bg-[var(--blue-500)] w-[100px] rounded-md transition-ease hover:bg-[var(--blue-700)]">
-        Search
-      </button>
 
-    </div>
+    <button class="bg-[var(--blue-500)] w-[100px] rounded-md transition-ease hover:bg-[var(--blue-700)]">
+      Search
+    </button>
+
+  </div>
 
   </div>
   <!--   the main Ui-->
@@ -48,7 +74,7 @@
               <p class="dm-sans-semibold text-8xl italic">68°</p>
             </div>
           </div>
-<!--          Short card-->
+          <!--          Short card-->
           <div class="grid gap-6 grid-cols-3 md:grid-cols-4">
 
             <div class="flex flex-col text-start p-4 bg-[var(--neutral-800)] rounded-md gap-4">
@@ -82,11 +108,11 @@
               <div class="flex flex-col text-center p-4 bg-[var(--neutral-800)] rounded-md gap-4 w-full min-w-[100px]">
                 <p class="text-lg dm-sans-regular text-[var(--neutral-200)]">Tue</p>
                 <img src="/assets/Rain.svg">
-              <div class="flex flex-row justify-between gap-2">
-                <p class="text-lg dm-sans-medium">64°</p>
-                <p class="text-lg dm-sans-medium">57°</p>
+                <div class="flex flex-row justify-between gap-2">
+                  <p class="text-lg dm-sans-medium">64°</p>
+                  <p class="text-lg dm-sans-medium">57°</p>
 
-              </div>
+                </div>
               </div>
               <div class="flex flex-col text-center p-4 bg-[var(--neutral-800)] rounded-md gap-4 w-full min-w-[100px]">
                 <p class="text-lg dm-sans-regular text-[var(--neutral-200)]">Tue</p>
