@@ -36,10 +36,10 @@
 
         <!-- show results only when search is done and we have data -->
         @if (!isSearching && results.length > 0) {
-          <div class="bg-[var(--neutral-800)] rounded-md absolute top-15 left-0 w-full p-4">
+          <div class="bg-[var(--neutral-800)] rounded-md absolute top-15 left-0 w-full p-3">
             @for (city of results; track city.id) {
               <p
-                class="text-white text-lg p-2 rounded-md cursor-pointer hover:bg-[var(--neutral-700)]"
+                class="text-white text-lg p-3 rounded-md cursor-pointer hover:bg-[var(--neutral-700)]"
               >
                 {{ city.name }}, {{ city.country }}
               </p>
