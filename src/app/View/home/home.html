@@ -39,7 +39,8 @@
           <div class="bg-[var(--neutral-800)] rounded-md absolute top-15 left-0 w-full p-3">
             @for (city of results; track city.id) {
               <p
-                class="text-white text-lg p-3 rounded-md cursor-pointer hover:bg-[var(--neutral-700)]"
+                class="text-white text-lg p-3 rounded-md cursor-pointer hover:bg-[var(--neutral-700)] click:bg-[var(--neutral-800)]"
+              (click)="onSelect(city)"
               >
                 {{ city.name }}, {{ city.country }}
               </p>
@@ -50,7 +51,9 @@
       </div>
 
 
-    <button class="bg-[var(--blue-500)] w-[100px] rounded-md transition-ease hover:bg-[var(--blue-700)]">
+    <button class="bg-[var(--blue-500)] w-[100px] rounded-md transition-ease
+
+    hover:bg-[var(--blue-700)]">
       Search
     </button>
 
