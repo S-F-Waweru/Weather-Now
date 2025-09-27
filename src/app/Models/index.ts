@@ -9,6 +9,17 @@ export interface WeatherData {
   week: DailyDataItem[];
 }
 
+export interface HourlyPoint {
+  time: string;
+  temperature: number;
+  humidity: number;
+  windspeed: number;
+  precipitation: number;
+  tempMax: number;
+  tempMin: number;
+}
+
+
 export interface HourlyData {
   time: string[];
   temperature: number[];
@@ -23,6 +34,7 @@ export interface DailyDataItem {
   tempMin: number;
   precipitation: number;
   windspeedMax: number;
+  humidity: number;
 }
 
 // export interface LocationData {

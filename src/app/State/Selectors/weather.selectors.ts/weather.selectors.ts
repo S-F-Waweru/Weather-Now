@@ -24,7 +24,12 @@ export const isSearchingSelecotor = createSelector(
 
 export const getCityForecastSuccessSelector = createSelector(
     weatherForecastFeature, 
-    (state) => state.getWeatherForecastSuccess
+    (state) => {
+        console.log('[Weather Daaaata]');
+        
+        console.log(state.getWeatherForecastSuccess);
+        return state.getWeatherForecastSuccess;
+    }
 )
 
 export const getCityForecastFailureSelector = createSelector(

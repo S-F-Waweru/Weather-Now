@@ -25,7 +25,8 @@ const emptyWeatherData : WeatherData = {
         tempMax: 0,
         tempMin: 0,
         precipitation: 0,
-        windspeedMax: 0
+        windspeedMax: 0,
+        humidity: 0
     },
     week: []
 }
@@ -85,25 +86,25 @@ export const WeatherForecastReducer = createReducer(
      on(WeatherAction.getCityForecast, (state) => {
         return{
             ...state,
-            getCitySuccess: [],
-            getCityFailure : '',
-            getCityLoading : true,
+            getWeatherForecastSuccess: emptyWeatherData,
+            getWeatherForcastFailure : '',
+            getWeatherForecastLoading : true,
         }
     }),
      on(WeatherAction.getCityForecastSuccess, (state, action) => {
         return{
             ...state,
-            getCitySuccess: action.data,
-            getCityFailure : '',
-            getCityLoading : false,
+            getWeatherForecastSuccess: action.data,
+            getWeatherForcastFailure : '',
+            getWeatherForecastLoading : false,
         }
     }),
          on(WeatherAction.getCityForecastFailure, (state, action) => {
         return{
             ...state,
-            getCitySuccess: [],
-            getCityFailure : action.error,
-            getCityLoading : false,
+            getWeatherForecastSuccess: emptyWeatherData,
+            getWeatherForcastFailure : action.error,
+            getWeatherForecastLoading : false,
         }
     })
 
