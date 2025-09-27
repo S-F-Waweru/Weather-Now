@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {debounceTime, Subject} from 'rxjs';
 import {WeatherService} from '../../Services/weather-service';
+import {WeatherData} from '../../Models';
 
 @Component({
   selector: 'app-home',
@@ -63,17 +64,29 @@ export class Home implements OnInit {
     this.cdr.detectChanges();
     console.log(result);
     this.service.getWeatherData(result.latitude, result.longitude).subscribe({
-      next: (data: any) => {
-        console.log("DARAAAA here")
+      next: (data: WeatherData | null) => {
+        if (!data) {
+          console.log("No weather data available");
+          return;
+        }
+
+        console.log("DARAAAA here");
         console.log(data);
+
+        // Example: access hourly temperature
+        console.log("First hourly temp:", data.hourly.temperature[0]);
+
+        // Example: today's max temperature
+        console.log("Today's max temp:", data.today?.tempMax);
       },
       error: (err: any) => {
-        console.log(err);
+        console.error(err);
       },
       complete: () => {
         console.log("complete");
       }
-    })
+    });
+
   }
 
 }
