@@ -1,7 +1,8 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {catchError, map, Observable, of} from 'rxjs';
-import {LocationData, WeatherData} from '../Models';
+import { HttpClient } from "@angular/common/http";
+import { Injectable, inject } from "@angular/core";
+import { Observable, map, catchError, of } from "rxjs";
+import { City, WeatherData } from "../Models";
+
 
 
 @Injectable({
@@ -12,8 +13,8 @@ export class WeatherService {
  searchURL = "https://geocoding-api.open-meteo.com/v1/"
   private baseUrl = 'https://api.open-meteo.com/v1/forecast';
 
-  getLongitudeAndLatitude(city: string):Observable<any> {
-    return this.http.get<LocationData>(this.searchURL + "search?name=" + city + "&count=5&language=en")
+  getLongitudeAndLatitude(city: string):Observable<City[]> {
+    return this.http.get<City[]>(this.searchURL + "search?name=" + city + "&count=5&language=en")
   }
 
   // getWeatherData(lat: string, lng: string): Observable<any | null> {

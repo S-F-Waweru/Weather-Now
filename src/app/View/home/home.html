@@ -25,7 +25,7 @@
                (input)="onType($event)"
                class="w-full bg-transparent outline-none text-white">
         <!-- show “Searching” only while actively searching -->
-        @if (isSearching) {
+        @if (isSearching$| async) {
           <div class="bg-[var(--neutral-800)] rounded-md absolute top-15 left-0 w-full p-4">
             <div class="flex flex-row gap-2">
               <img src="/assets/Daily%20Forecast%20Title-2.svg" alt="searching">
@@ -34,19 +34,17 @@
           </div>
         }
 
-        <!-- show results only when search is done and we have data -->
-        @if (!isSearching && results.length > 0) {
-          <div class="bg-[var(--neutral-800)] rounded-md absolute top-15 left-0 w-full p-3">
-            @for (city of results; track city.id) {
-              <p
-                class="text-white text-lg p-3 rounded-md cursor-pointer hover:bg-[var(--neutral-700)] click:bg-[var(--neutral-800)]"
-              (click)="onSelect(city)"
-              >
-                {{ city.name }}, {{ city.country }}
-              </p>
-            }
-          </div>
-        }
+  <!-- show results only when search is done and we have data -->
+    @if (showResults$ |async) {
+  <div class="bg-[var(--neutral-800)] rounded-md absolute top-15 left-0 w-full p-3">
+    @for (city of cities$| async; track city.id) {
+    <p class="text-white text-lg p-3 rounded-md cursor-pointer hover:bg-[var(--neutral-700)] active:bg-[var(--neutral-800)]"
+      (click)="onSelect(city)">
+      {{ city.name }}, {{ city.country }}
+    </p>
+    }
+  </div>
+  }
 
       </div>
 

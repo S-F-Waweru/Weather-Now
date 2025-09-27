@@ -21,8 +21,9 @@ export class WeatherEffects {
             // call is allowed to complete.
             switchMap(({city}) => this.weatherService.getLongitudeAndLatitude(city) .pipe(
                 map(response => {
-                     return WeatherAction.getCitySuccess({ data: response })
-                }), 
+                     console.log('API response from geocoding:', response);
+                     return WeatherAction.getCitySuccess({ cities: response })
+                }),
                 //  error Message
                 catchError(error =>{
                     return of(WeatherAction.getCityFailure({error}))

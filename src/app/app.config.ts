@@ -6,8 +6,9 @@ import {provideHttpClient} from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { WeatherForecastReducer } from './State/Reducers/weather.reducer';
-import { WeatherEffects } from './State/Effects/weather.effects';
+import { WeatherEffects } from './state/Effects/weather.effects';
+import { WeatherForecastReducer } from './state/Reducers/weather.reducer';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [

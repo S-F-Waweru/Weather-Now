@@ -25,7 +25,21 @@ export interface DailyDataItem {
   windspeedMax: number;
 }
 
-export interface LocationData {
+// export interface LocationData {
+//   id: number;
+//   name: string;
+//   latitude: number;
+//   longitude: number;
+//   elevation: number;
+//   feature_code: string;
+//   country_code: string;
+//   timezone: string;
+//   population: number;
+//   country_id: number;
+//   country: string;
+// }
+
+export interface City {
   id: number;
   name: string;
   latitude: number;
@@ -34,7 +48,12 @@ export interface LocationData {
   feature_code: string;
   country_code: string;
   timezone: string;
-  population: number;
+  population?: number;
+  postcodes?: string[];
   country_id: number;
   country: string;
+  // Dynamic admin ID fields: admin1_id, admin2_id, admin3_id, etc.
+  [key: `admin${number}_id`]: number;
+  // Dynamic admin name fields: admin1, admin2, admin3, etc.
+  [key: `admin${number}`]: string;
 }

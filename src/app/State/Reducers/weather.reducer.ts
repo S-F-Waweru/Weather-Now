@@ -1,34 +1,48 @@
 import { createReducer, on } from "@ngrx/store"
-import { WeatherData } from "../../Services/weather-service"
+import { City, WeatherData } from "../../Models"
 import { WeatherAction } from "../Actions/weather.actions"
 
 
 
+
+
+
 const emptyWeatherData : WeatherData = {
-    hourly: {
-        time: [],
-        temperature_2m: [],
-        precipitation: []
-    },
     latitude: 0,
     longitude: 0,
     elevation: 0,
-    utcOffsetSeconds: 0
+    utcOffsetSeconds: 0,
+    hourly: {
+        time: [],
+        temperature: [],
+        precipitation: [],
+        windspeed: [],
+        humidity: []
+    },
+    daily: [],
+    today: {
+        date: "",
+        tempMax: 0,
+        tempMin: 0,
+        precipitation: 0,
+        windspeedMax: 0
+    },
+    week: []
 }
 
 
 export interface WeatherForecastInterface {
-        getCitySuccess: string
-        getCityFailure : string
-        getCityLoading : boolean
+  getCitySuccess: City[];
+  getCityFailure: string;
+  getCityLoading: boolean;
 
-        getWeatherForecastSuccess: WeatherData
-        getWeatherForcastFailure : string
-        getWeatherForecastLoading: boolean
+  getWeatherForecastSuccess: WeatherData;
+  getWeatherForcastFailure: string;
+  getWeatherForecastLoading: boolean;
 }
 
 export const initialState: WeatherForecastInterface = {
-        getCitySuccess: '',
+        getCitySuccess: [],
         getCityFailure : '',
         getCityLoading : false,
 
@@ -43,7 +57,7 @@ export const WeatherForecastReducer = createReducer(
     on(WeatherAction.getCity, (state) => {
         return{
             ...state,
-            getCitySuccess: '',
+            getCitySuccess: [],
             getCityFailure : '',
             getCityLoading : true,
         }
@@ -51,7 +65,7 @@ export const WeatherForecastReducer = createReducer(
       on(WeatherAction.getCitySuccess, (state, action) => {
         return{
             ...state,
-            getCitySuccess: action.data,
+            getCitySuccess: action.cities,
             getCityFailure : '',
             getCityLoading : false,
         }
@@ -59,17 +73,19 @@ export const WeatherForecastReducer = createReducer(
       on(WeatherAction.getCityFailure, (state, action) => {
         return{
             ...state,
-            getCitySuccess: '',
+            getCitySuccess: [],
             getCityFailure : action.error,
             getCityLoading : false,
         }
-    }),
+      }),
+      
+    
 
     // get weatherforecast
      on(WeatherAction.getCityForecast, (state) => {
         return{
             ...state,
-            getCitySuccess: '',
+            getCitySuccess: [],
             getCityFailure : '',
             getCityLoading : true,
         }
@@ -85,7 +101,7 @@ export const WeatherForecastReducer = createReducer(
          on(WeatherAction.getCityForecastFailure, (state, action) => {
         return{
             ...state,
-            getCitySuccess: '',
+            getCitySuccess: [],
             getCityFailure : action.error,
             getCityLoading : false,
         }

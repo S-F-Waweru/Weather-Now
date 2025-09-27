@@ -1,10 +1,11 @@
 import { createActionGroup, props } from "@ngrx/store";
+import { City } from "../../Models";
 
 export const WeatherAction = createActionGroup({
   source: "Weather API",
   events: {
     'GetCity':props<{ city: string }>(),
-    'GetCitySuccess': props<{ data: any }>(),
+    'GetCitySuccess': props<{ cities: City[] }>(),
     'GetCityFailure': props<{ error: any }>(),
 
 

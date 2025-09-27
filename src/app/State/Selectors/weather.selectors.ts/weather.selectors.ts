@@ -1,15 +1,24 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { createFeatureSelector, createSelector, State } from "@ngrx/store";
 import { WeatherForecastInterface } from "../../Reducers/weather.reducer";
 
 const weatherForecastFeature = createFeatureSelector<WeatherForecastInterface>('weatherForecast')
 
 export const  getCitySuccessSelectoer = createSelector
    (weatherForecastFeature, 
-   (state) => state.getCitySuccess )
+       (state) => {
+           console.log(state.getCitySuccess);
+           return state.getCitySuccess;
+       
+   } )
 export const  getCityFailureSelector = createSelector(
     weatherForecastFeature, 
     (state) => state.getCityFailure
 )
+
+export const isSearchingSelecotor = createSelector(
+  weatherForecastFeature,
+  (state) => state.getCityLoading
+);
 
 // weather Forecast
 

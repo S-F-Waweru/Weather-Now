@@ -1,23 +1,24 @@
-import {Component, OnInit, signal} from '@angular/core';
-import {Router, RouterOutlet } from '@angular/router';
-import {Home} from './View/home/home';
-import {NetworkStatusService} from './Services/network-status-service';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { NetworkStatusService } from './Services/network-status-service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet], // Only include what you're actually using in the template
   templateUrl: './app.html',
   standalone: true,
-  styleUrl: './app.css'
-
+  styleUrl: './app.css',
 })
-export class App implements OnInit{
-    constructor(private net: NetworkStatusService, private router: Router) {}
+export class App implements OnInit {
+  private router = inject(Router);
+
+  constructor(private net: NetworkStatusService) {}
+
   ngOnInit(): void {
-    this.net.isOnline$.subscribe(online => {
+    this.net.isOnline$.subscribe((online) => {
       if (!online) {
-        this.router.navigate(['/offline'])
+        this.router.navigate(['/offline']);
       }
-    })
+    });
   }
 }
